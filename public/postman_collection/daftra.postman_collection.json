@@ -1,0 +1,169 @@
+{
+	"info": {
+		"_postman_id": "4c5b445f-3269-4ae3-bca2-5934fd326fbd",
+		"name": "daftra",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39133882"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"admin@admin.com\",\r\n    \"password\" : \"123123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}login",
+							"host": [
+								"{{url}}login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "inventory",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}inventory?min_price=50&max_price=55",
+					"host": [
+						"{{url}}inventory"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "item a",
+							"disabled": true
+						},
+						{
+							"key": "min_price",
+							"value": "50"
+						},
+						{
+							"key": "max_price",
+							"value": "55"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "show warehouses inventory",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}warehouses/1/inventory",
+					"host": [
+						"{{url}}warehouses"
+					],
+					"path": [
+						"1",
+						"inventory"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "stock-transfers",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "1|Mh9okBTl3HDrzQHDBbJPFkewf0Cm9IVSzLcQzVyf90c95ea9",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"inventory_item_id\": 1,\r\n    \"from_warehouse_id\": 1,\r\n    \"to_warehouse_id\": 2,\r\n    \"quantity\": 50000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}stock-transfers",
+					"host": [
+						"{{url}}stock-transfers"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "http://daftra-task.test/api/",
+			"type": "string"
+		}
+	]
+}
