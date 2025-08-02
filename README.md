@@ -11,12 +11,7 @@ A simplified RESTful API for managing inventory across multiple warehouses using
 3. Copy `.env.example` to `.env` and configure DB
 4. Run `php artisan key:generate`
 5. Run migrations: `php artisan migrate`
-6. Install Sanctum:
-   ```bash
-   composer require laravel/sanctum
-   php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
-   php artisan migrate
-   ```
+5. Run migrations: `php db:seed`
 7. Create test user and authenticate with Sanctum.
 
 ---
@@ -27,7 +22,12 @@ A simplified RESTful API for managing inventory across multiple warehouses using
 - `GET /api/inventory`
   - Query params: `name`, `min_price`, `max_price`
 - `GET /api/warehouses/{id}/inventory`
-
+- `GET /api/login`
+    ```bash
+    payload: {
+        "email" : "admin@admin.com",
+        "password" : "123123"
+    }
 ### Protected:
 - `POST /api/stock-transfers`
   - Requires authentication via Sanctum
@@ -41,6 +41,10 @@ Request body:
   "quantity": 5
 }
 ```
+Postman Collection: https://github.com/AndrewWagih/daftra-task/blob/main/public/postman_collection/daftra.postman_collection.json
+
+DB: https://github.com/AndrewWagih/daftra-task/blob/main/public/DB/daftra.sql
+
 
 ---
 
@@ -51,8 +55,10 @@ Run all tests using:
 php artisan test
 ```
 Tests included:
+- ✅ Unit test for transfer success
 - ✅ Unit test for over-transfer error
 - ✅ Feature test for successful transfer
+- ✅ Feature test for fail transfer
 - ✅ Event test for low-stock detection
 
 ---
